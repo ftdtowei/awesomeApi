@@ -1,0 +1,460 @@
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json;
+
+{“account”:"ftd_wei@163.com"}
+
+<> 2018-09-07T053353.200.json
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json;
+
+{“account”:"ftd_wei@163.com"}
+
+<> 2018-09-07T040216.200.json
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json;
+
+{“account”:"ftd_wei@163.com"}
+
+<> 2018-09-07T033634.200.json
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json;
+
+{“account”:"ftd_wei@163.com"}
+
+<> 2018-09-07T032025.200.json
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json;
+
+{“account”:"ftd_wei@163.com"}
+
+<> 2018-09-07T030125.200.json
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json;
+
+{“account”:"ftd_wei@163.com"}
+
+<> 2018-09-07T025954.200.json
+
+###
+
+POST http://localhost:8080/user/login?account=ftd_wei@163.com
+Accept: */*
+Cache-Control: no-cache
+
+{“account”:"ftd_wei@163.com"}
+
+<> 2018-09-07T025754.200.json
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{“account”:"ftd_wei@163.com"}
+
+<> 2018-09-07T025218.200.json
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{“account”:"ftd_wei@163.com"}
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{“account”:"ftd_wei@163.com"}
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{“account”:"ftd_wei@163.com"}
+
+<> 2018-09-07T024914.200.json
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{“account”:"ftd_wei@163.com"}
+
+<> 2018-09-07T023521.200.json
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{“account”:"ftd_wei@163.com"}
+
+<> 2018-09-07T023513.200.json
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{“account”:"ftd_wei@163.com"}
+
+<> 2018-09-07T023250.200.json
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{“account”:"ftd_wei@163.com"}
+
+<> 2018-09-07T023209.200.json
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{“account”:"123"}
+
+<> 2018-09-07T023113.200.json
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{“account”:"123"}
+
+<> 2018-09-07T023035.200.json
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{“account”:"123"}
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{“account”:"123"}
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{“account”:"123"}
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+<> 2018-09-07T021935.200.json
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+<> 2018-09-07T011237.200.json
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+<> 2018-09-07T011109.200.json
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+###
+
+POST http://localhost:8080/project/qry
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+<> 2018-09-07T103422-2.200.json
+
+###
+
+POST http://localhost:8080/project/qry
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+<> 2018-09-07T103422-1.200.json
+
+###
+
+POST http://localhost:8080/project/qry
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+<> 2018-09-07T103422.200.json
+
+###
+
+POST http://localhost:8080/project/qry
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+<> 2018-09-07T103421.200.json
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+<> 2018-09-07T103359.200.json
+
+###
+
+POST http://localhost:8080/user/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+###
+
+POST http://localhost:8080/project/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+<> 2018-09-07T102544-1.200.json
+
+###
+
+POST http://localhost:8080/project/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+<> 2018-09-07T102544.200.json
+
+###
+
+POST http://localhost:8080/project/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+<> 2018-09-07T102543.200.json
+
+###
+
+POST http://localhost:8080/project/login
+Accept: */*
+Cache-Control: no-cache
+
+{}
+
+<> 2018-09-07T102542.200.json
+
+###
+

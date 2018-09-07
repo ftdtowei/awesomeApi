@@ -1,0 +1,9 @@
+{
+  "return": "ok",
+  "user": {
+    "Id": "1",
+    "Name": "weiguo",
+    "Account": "ftd_wei@163.com",
+    "Passwd": "123456"
+  }
+}
