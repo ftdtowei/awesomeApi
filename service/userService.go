@@ -1,6 +1,7 @@
 package service
 
 import (
+	"awesomeApi/utils"
 	"database/sql"
 	. "encoding/json"
 	"errors"
@@ -8,18 +9,20 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	"io/ioutil"
-	"net/http"
-	"awesomeProject/utils"
-	"time"
 	"log"
+	"net/http"
+	"time"
 )
+
+//包下的全局变量  所有的service都可以调用
 var db *sql.DB
 var herr error
-func init(){
-	fmt.Println("userService init")
+
+func init() {
+	fmt.Println("db init")
 	//打开数据库
 	//DSN数据源字符串：用户名:密码@协议(地址:端口)/数据库?参数=参数值
-	db,herr= sql.Open("mysql", "root:root@tcp(52.80.180.58:3306)/awesome_db?charset=utf8")
+	db, herr = sql.Open("mysql", "root:root@tcp(52.80.180.58:3306)/awesome_db?charset=utf8")
 	if herr != nil {
 		fmt.Println(herr)
 	}
@@ -39,28 +42,27 @@ func init(){
  * @auther: wg
  * @date:
  */
-func UserRegister(c *gin.Context){
+func UserRegister(c *gin.Context) {
 	//将body 流转换成 map
 	data, _ := ioutil.ReadAll(c.Request.Body)
 	fmt.Println("----UserRegister params----")
 	fmt.Println("ctx.Request.body: %v", string(data))
 	var m map[string]string
 	err := Unmarshal(data, &m)
-	if(err != nil){
-		c.JSON(http.StatusOK,gin.H{"return":"json error"})
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{"return": "json error"})
 		return
 	}
 	//name:=m["name"]
 	//account:=m["account"]
 	//passwd:=m["passwd"]
 
-	err = createUser(m);
-	if(err != nil ){
-		c.JSON(http.StatusOK,gin.H{"return":err.Error()})
-	}else {
-		c.JSON(http.StatusOK,gin.H{"return":"注册成功"})
+	err = createUser(m)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{"return": err.Error()})
+	} else {
+		c.JSON(http.StatusOK, gin.H{"return": "注册成功"})
 	}
-
 
 }
 
@@ -73,7 +75,7 @@ func UserRegister(c *gin.Context){
  * @auther: wg
  * @date:
  */
-func UserLogin(c *gin.Context){
+func UserLogin(c *gin.Context) {
 
 	//将body 流转换成 map
 	data, _ := ioutil.ReadAll(c.Request.Body)
@@ -81,39 +83,37 @@ func UserLogin(c *gin.Context){
 	fmt.Println("ctx.Request.body: %v", string(data))
 	var m map[string]string
 	err := Unmarshal(data, &m)
-	account:=m["account"]
-	passwd:=m["passwd"]
+	account := m["account"]
+	passwd := m["passwd"]
 	//登录查询用户是否存在/密码校验
-	user,err := isUserExist(account,passwd)
+	user, err := isUserExist(account, passwd)
 	//用户失败
-	if(err != nil){
-		c.JSON(http.StatusOK,gin.H{"return":err.Error()})
-	}else{
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{"return": err.Error()})
+	} else {
 		//设置登录session
 		cookie := &http.Cookie{
 			Name:     "session_id",
 			Value:    "aweSomeApi",
 			Path:     "/",
-			MaxAge:   3600*4,//四个小时超时
+			MaxAge:   3600 * 4, //四个小时超时
 			HttpOnly: true,
 		}
 		http.SetCookie(c.Writer, cookie)
 
-		c.JSON(http.StatusOK,gin.H{
-			"return":"success",
-			"user":user,
+		c.JSON(http.StatusOK, gin.H{
+			"return": "success",
+			"user":   user,
 		})
 	}
 
-
 }
 
-
 type UserInfo struct {
-	Id string
-	Name string
+	Id      string
+	Name    string
 	Account string
-	Passwd string
+	Passwd  string
 }
 
 /**
@@ -125,46 +125,44 @@ type UserInfo struct {
  * @auther: wg
  * @date:
  */
-func isUserExist (accountP string , passwdP string) (UserInfo,error){
+func isUserExist(accountP string, passwdP string) (UserInfo, error) {
 	//func isUserExist (account string , passwd string) (UserInfo,error){
 
-
-	qry:= "select id,name,account,passwd from tb_user where account = " +"'"+accountP+"'"
-	rows, _ := db.Query(qry )
+	qry := "select id,name,account,passwd from tb_user where account = " + "'" + accountP + "'"
+	rows, _ := db.Query(qry)
 
 	result := UserInfo{
-		Id :"",
-		Name :"",
-		Account :"",
-		Passwd :"",
+		Id:      "",
+		Name:    "",
+		Account: "",
+		Passwd:  "",
 	}
-	id :=""
-	name :=""
-	account :=""
-	passwd :=""
+	id := ""
+	name := ""
+	account := ""
+	passwd := ""
 
 	//没有查到数据
-	if(rows == nil ||rows.Next() != true){
+	if rows == nil || rows.Next() != true {
 		var err = errors.New("账号不存在或密码错误 ")
-		return result ,err
+		return result, err
 	}
 	//返回第一个数据
-	rows.Scan(&id, &name,&account,&passwd);
-	fmt.Println(id, name,account,passwd);
+	rows.Scan(&id, &name, &account, &passwd)
+	fmt.Println(id, name, account, passwd)
 	user := UserInfo{
-		Id:id,
-		Name:name,
-		Account:account,
-		Passwd:passwd,
+		Id:      id,
+		Name:    name,
+		Account: account,
+		Passwd:  passwd,
 	}
 	//密码不正确
-	if(passwdP!=passwd){
+	if passwdP != passwd {
 		var err = errors.New("账号不存在或密码错误 ")
-		return result ,err
+		return result, err
 	}
 
-
-	return user,nil
+	return user, nil
 }
 
 /**
@@ -176,17 +174,17 @@ func isUserExist (accountP string , passwdP string) (UserInfo,error){
  * @auther: wg
  * @date:
  */
-func createUser(m map[string]string) error{
-	id:=utils.UniqueId()
-	name:=m["name"]
-	account:=m["account"]
-	passwd:=m["passwd"]
-	createTime:=time.Now()
+func createUser(m map[string]string) error {
+	id := utils.UniqueId()
+	name := m["name"]
+	account := m["account"]
+	passwd := m["passwd"]
+	createTime := time.Now()
 
-	user,err := isUserExist(account,"WrOnGpAsSwD")
+	user, err := isUserExist(account, "WrOnGpAsSwD")
 
 	fmt.Println(user)
-	if(err !=nil){
+	if err != nil {
 		fmt.Println("--------账号已存在---------")
 		var err = errors.New("账号已存在")
 		return err
@@ -196,16 +194,12 @@ func createUser(m map[string]string) error{
 	if err != nil {
 		log.Fatalln(err)
 	}
-	res, err := stmt.Exec(id, name,account,passwd,createTime)
+	res, err := stmt.Exec(id, name, account, passwd, createTime)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	fmt.Println(res);
+	fmt.Println(res)
 
 	return nil
 }
-
-
-
-

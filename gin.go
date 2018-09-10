@@ -28,21 +28,23 @@ func main() {
 		user.POST("/register", service.UserRegister)
 	}
 
-
 	//项目接口管理
 	project := router.Group("/project")
 	{
-		project.Use(Validate())
+		//project.Use(Validate())
 		//查询自己关联的项目
 		project.POST("/qryMyPro", service.QryMyPro)
 
 		//增删项目成员
 		project.POST("manageMember", service.ManageMember)
 
-		//查询接口模块
+		//查询项目模块
 		project.POST("/qryModule", service.QryModule)
 
-		//管理接口模块  增删改
+		//锁定项目模块
+		project.POST("/lockModule", service.LockModule)
+
+		//管理项目模块  增删改
 		project.POST("/manageModule", service.ManageModule)
 
 		//管理分组
