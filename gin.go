@@ -28,31 +28,34 @@ func main() {
 		user.POST("/register", service.UserRegister)
 	}
 
-	group := router.Group("/group")
-	{
-		group.Use(Validate())
-		//创建团队
-		user.POST("/create", service.UserLogin)
-
-		//修改团队
-		user.POST("/modify", service.UserRegister)
-
-		//删除团队
-		user.POST("/delect", service.UserRegister)
-
-		//添加成员
-		user.POST("/addMember", service.UserRegister)
-
-		//删除成员
-		user.POST("/deleteMember", service.UserRegister)
-
-	}
 
 	//项目接口管理
 	project := router.Group("/project")
 	{
 		project.Use(Validate())
-		project.POST("/qry", service.GetSelfPro)
+		//查询自己关联的项目
+		project.POST("/qryMyPro", service.QryMyPro)
+
+		//增删项目成员
+		project.POST("manageMember", service.ManageMember)
+
+		//查询接口模块
+		project.POST("/qryModule", service.QryModule)
+
+		//管理接口模块  增删改
+		project.POST("/manageModule", service.ManageModule)
+
+		//管理分组
+		project.POST("/managePage", service.ManagePage)
+
+		//查询模块下的分组及接口列表
+		project.POST("/qryActionList", service.QryActionList)
+
+		//查询接口详情
+		project.POST("/qryActionDetail", service.QryActionDetail)
+
+		//管理接口详情  增删改
+		project.POST("/manageActionDetail", service.ManageActionDetail)
 	}
 
 	router.Run(":8080")

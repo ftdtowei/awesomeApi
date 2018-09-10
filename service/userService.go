@@ -42,7 +42,8 @@ func init(){
 func UserRegister(c *gin.Context){
 	//将body 流转换成 map
 	data, _ := ioutil.ReadAll(c.Request.Body)
-	fmt.Printf("ctx.Request.body: %v", string(data))
+	fmt.Println("----UserRegister params----")
+	fmt.Println("ctx.Request.body: %v", string(data))
 	var m map[string]string
 	err := Unmarshal(data, &m)
 	if(err != nil){
