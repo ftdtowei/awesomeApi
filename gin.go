@@ -1,7 +1,7 @@
 package main
 
 import (
-	"awesomeProject/service"
+	"awesomeApi/service"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"io"
@@ -55,12 +55,10 @@ func main() {
 		project.POST("/qry", service.GetSelfPro)
 	}
 
-
-
 	router.Run(":8080")
 }
 
-func Validate() gin.HandlerFunc{
+func Validate() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if cookie, err := c.Request.Cookie("session_id"); err == nil {
 			value := cookie.Value
@@ -77,4 +75,3 @@ func Validate() gin.HandlerFunc{
 		return
 	}
 }
-
