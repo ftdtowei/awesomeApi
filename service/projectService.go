@@ -177,12 +177,112 @@ func QryModule(c *gin.Context) {
 
 //锁定项目模块
 func LockModule(c *gin.Context) {
+
+	//转换body
+	params, err := bodytomap(c)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{"return": "json error"})
+		return
+	}
+	projectId := params["projectId"].(string)
+	moduleId := params["moduleId"].(string)
+	userId := params["userId"].(string)
+	utils.LockKey(projectId, moduleId, userId)
 	c.JSON(http.StatusOK, gin.H{"return": "success"})
+}
+
+//解锁项目模块
+func UnlockModule(c *gin.Context) {
+	//转换body
+	params, err := bodytomap(c)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{"return": "json error"})
+		return
+	}
+	projectId := params["projectId"].(string)
+	moduleId := params["moduleId"].(string)
+	utils.UnlockKey(projectId, moduleId)
+	c.JSON(http.StatusOK, gin.H{"return": "success"})
+
 }
 
 //管理项目模块  增删改
 func ManageModule(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{"return": "success"})
+	//转换body
+	params, err := bodytomap(c)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{"return": "json error"})
+		return
+	}
+	projectId := params["projectId"].(string)
+	opt := params["opt"].(string)
+
+	if opt == "add" {
+		id := utils.UniqueId()
+		moduleName := params["moduleName"].(string)
+		//新增模块
+		stmt, err := db.Prepare("insert into tb_module (id,module_name,create_time) values (?,?,?)")
+		if err != nil {
+			log.Fatalln(err)
+		}
+		res, err := stmt.Exec(id, moduleName, time.Now())
+		if err != nil {
+			log.Fatalln(err)
+		}
+		println(res)
+		//新增项目与模块映射
+		idExt := utils.UniqueId()
+		stmtExt, err := db.Prepare("insert into project_and_module (id,project_id,module_id) values (?,?,?)")
+		if err != nil {
+			log.Fatalln(err)
+		}
+		resExt, err := stmtExt.Exec(idExt, projectId, id)
+		if err != nil {
+			log.Fatalln(err)
+		}
+		println(resExt)
+
+		c.JSON(http.StatusOK, gin.H{"return": "success"})
+		return
+	} else if opt == "upt" {
+		moduleId := params["moduleId"].(string)
+		moduleName := params["moduleName"].(string)
+
+		stmtExt, err := db.Prepare("update tb_module set module_name = ? where id = ?")
+		if err != nil {
+			log.Fatalln(err)
+		}
+		resExt, err := stmtExt.Exec(moduleName, moduleId)
+		if err != nil {
+			log.Fatalln(err)
+		}
+		println(resExt)
+		c.JSON(http.StatusOK, gin.H{"return": "success"})
+		return
+	} else if opt == "del" {
+		moduleId := params["moduleId"].(string)
+		//判断是否被锁定
+		isLock, val := utils.IsLockKey(projectId, moduleId)
+		//被锁返回 锁定人名字
+		if isLock {
+			c.JSON(http.StatusOK, gin.H{"return": "success", "user_name": val})
+			return
+		}
+
+		stmtExt, err := db.Prepare("delete from tb_module  where id = ?")
+		if err != nil {
+			log.Fatalln(err)
+		}
+		resExt, err := stmtExt.Exec(moduleId)
+		if err != nil {
+			log.Fatalln(err)
+		}
+		println(resExt)
+		c.JSON(http.StatusOK, gin.H{"return": "success"})
+		return
+
+	}
+
 }
 
 //管理分组

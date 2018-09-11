@@ -48,6 +48,9 @@ func main() {
 		//锁定项目模块
 		project.POST("/lockModule", service.LockModule)
 
+		//解锁项目模块
+		project.POST("/unlockModule", service.UnlockModule)
+
 		//管理项目模块  增删改
 		project.POST("/manageModule", service.ManageModule)
 

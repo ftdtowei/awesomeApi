@@ -2,7 +2,6 @@ package utils
 
 import (
 	"github.com/go-redis/redis"
-	"time"
 )
 
 //redis 全局变量
@@ -22,19 +21,18 @@ func init() {
 }
 
 //加操作锁
-func LockKey(project_id string, module_id string) {
+func LockKey(project_id string, module_id string, user_id string) {
 
-	redisConn.Set(prefix+project_id+midfix+module_id, time.Now(), 0) //锁得时间确定一下
+	redisConn.Set(prefix+project_id+midfix+module_id, user_id, 0) //锁得时间确定一下
 }
 
 //判断是否被锁
-func IsLockKey(project_id string, module_id string) bool {
+func IsLockKey(project_id string, module_id string) (bool, string) {
 	StringCmd, err := redisConn.Get(prefix + project_id + midfix + module_id).Result()
-	println(StringCmd)
-	if err != nil { //被锁
-		return true
+	if err != nil { //没有被锁
+		return false, StringCmd
 	}
-	return false
+	return true, StringCmd
 }
 
 //解锁删除key
