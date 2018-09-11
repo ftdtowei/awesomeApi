@@ -31,9 +31,13 @@ func main() {
 	//项目接口管理
 	project := router.Group("/project")
 	{
+		//权限校验
 		//project.Use(Validate())
 		//查询自己关联的项目
 		project.POST("/qryMyPro", service.QryMyPro)
+
+		//查询项目详情
+		project.POST("/qryProjectDetail", service.QryProjectDetail)
 
 		//增删项目成员
 		project.POST("manageMember", service.ManageMember)
@@ -50,8 +54,8 @@ func main() {
 		//管理分组
 		project.POST("/managePage", service.ManagePage)
 
-		//查询模块下的分组及接口列表
-		project.POST("/qryActionList", service.QryActionList)
+		////查询模块下的分组及接口列表
+		//project.POST("/qryActionList", service.QryActionList)
 
 		//查询接口详情
 		project.POST("/qryActionDetail", service.QryActionDetail)
